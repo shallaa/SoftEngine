@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="libs/babylon.math.js"></script>
+    <script src="libs/softengine.0.3.js"></script>
+</head>
+<body>
+<canvas id="frontBuffer" style="background-color:#000000"></canvas>
+<script>
+    (function(doc){
+        'use strict';
+        var canvas, device, meshes = [], camera;
+
+        doc.addEventListener( 'DOMContentLoaded', init, false );
+
+        function init(){
+            canvas = doc.getElementById('frontBuffer');
+            device = new SoftEngine.Device(canvas);
+
+            camera = new SoftEngine.Camera();
+            camera.Position = new BABYLON.Vector3( 0, 0, 10 );
+            camera.Target = new BABYLON.Vector3( 0, 0, 0 );
+
+            device.LoadJSONFileAsync( 'models/monkey.babylon', loadJSONCompleted );
+        }
+
+        function loadJSONCompleted(meshesLoaded){
+            meshes = meshesLoaded;
+            requestAnimationFrame(drawingLoop);
+        }
+
+        function drawingLoop(){
+            device.clear();
+
+            var i = 0, j = meshes.length;
+            for( ; i < j; i++ ){
+                meshes[i].Rotation.x += 0.01;
+                meshes[i].Rotation.y += 0.01;
+            }
+
+            device.render( camera, meshes );
+            device.present();
+
+            requestAnimationFrame(drawingLoop);
+        }
+    })(document);
+</script>
+</body>
+</html>

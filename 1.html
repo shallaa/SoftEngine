@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="libs/babylon.math.js"></script>
+    <script src="libs/softengine.0.1.js"></script>
+</head>
+<body>
+<canvas id="frontBuffer" style="background-color:#000000"></canvas>
+<script>
+    (function(doc){
+        'use strict';
+        var canvas, device, mesh, meshes = [], camera;
+
+        doc.addEventListener( 'DOMContentLoaded', init, false );
+
+        function init(){
+            canvas = doc.getElementById('frontBuffer');
+            mesh = new SoftEngine.Mesh( 'Cube', 8 );
+            meshes.push(mesh);
+            camera = new SoftEngine.Camera();
+            device = new SoftEngine.Device(canvas);
+
+            mesh.Vertices[0] = new BABYLON.Vector3( -1,  1,  1 );
+            mesh.Vertices[1] = new BABYLON.Vector3(  1,  1,  1 );
+            mesh.Vertices[2] = new BABYLON.Vector3( -1, -1,  1 );
+            mesh.Vertices[3] = new BABYLON.Vector3( -1, -1, -1 );
+            mesh.Vertices[4] = new BABYLON.Vector3( -1,  1, -1 );
+            mesh.Vertices[5] = new BABYLON.Vector3(  1,  1, -1 );
+            mesh.Vertices[6] = new BABYLON.Vector3(  1, -1,  1 );
+            mesh.Vertices[7] = new BABYLON.Vector3(  1, -1, -1 );
+
+            camera.Position = new BABYLON.Vector3( 0, 0, 10 );
+            camera.Target = new BABYLON.Vector3( 0, 0, 0 );
+
+            requestAnimationFrame(drawingLoop);
+        }
+
+        function drawingLoop(){
+            device.clear();
+
+            mesh.Rotation.x += 0.01;
+            mesh.Rotation.y += 0.01;
+
+            device.render( camera, meshes );
+            device.present();
+
+            requestAnimationFrame(drawingLoop);
+        }
+    })(document);
+</script>
+</body>
+</html>
