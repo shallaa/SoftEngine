@@ -47,18 +47,24 @@
             camera.Position = new SoftEngine.Vector3( 0, 0, 10 );
             camera.Target = new SoftEngine.Vector3( 0, 0, 0 );
 
+            // render loop 시작.
             requestAnimationFrame(drawingLoop);
         }
 
+        // rendering loop
         function drawingLoop(){
             device.clear();
 
+            // 프레임마다 cube를 회전
             mesh.Rotation.x += 0.01;
             mesh.Rotation.y += 0.01;
 
+            // 여러 Mtrix 연산을 실행.
             device.render( camera, meshes );
+            // back buffer를 front buffer로 flush.
             device.present();
 
+            // rendering loop를 재호출
             requestAnimationFrame(drawingLoop);
         }
     })(document);

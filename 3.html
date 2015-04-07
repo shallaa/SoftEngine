@@ -3,7 +3,6 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script src="libs/babylon.math.js"></script>
     <script src="libs/softengine.0.3.js"></script>
 </head>
 <body>
@@ -20,29 +19,36 @@
             device = new SoftEngine.Device(canvas);
 
             camera = new SoftEngine.Camera();
-            camera.Position = new BABYLON.Vector3( 0, 0, 10 );
-            camera.Target = new BABYLON.Vector3( 0, 0, 0 );
+            camera.Position = new SoftEngine.Vector3( 0, 0, 10 );
+            camera.Target = new SoftEngine.Vector3( 0, 0, 0 );
 
             device.LoadJSONFileAsync( 'models/monkey.babylon', loadJSONCompleted );
         }
 
         function loadJSONCompleted(meshesLoaded){
             meshes = meshesLoaded;
+
+            // render loop 시작.
             requestAnimationFrame(drawingLoop);
         }
 
+        // rendering loop
         function drawingLoop(){
             device.clear();
 
             var i = 0, j = meshes.length;
             for( ; i < j; i++ ){
+                // 프레임마다 mesh의 Rotation을 증가시킴.
                 meshes[i].Rotation.x += 0.01;
                 meshes[i].Rotation.y += 0.01;
             }
 
+            // 여러 Mtrix 연산을 실행.
             device.render( camera, meshes );
+            // back buffer를 front buffer로 flush.
             device.present();
 
+            // rendering loop를 재호출
             requestAnimationFrame(drawingLoop);
         }
     })(document);
