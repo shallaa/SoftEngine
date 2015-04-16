@@ -47,8 +47,6 @@ Average FPS: <span id="averageFPS"></span>
             } );
         }
 
-        requestAnimationFrame(drawingLoop);
-
         function drawingLoop(){
             // FPS
             var now = Date.now(), currentFPS = 1000 / ( now - previousDate ), i;
@@ -72,6 +70,8 @@ Average FPS: <span id="averageFPS"></span>
             // rendering loop를 재호출
             requestAnimationFrame(drawingLoop);
         }
+
+        drawingLoop();
     })(document);
 </script>
 </body>
