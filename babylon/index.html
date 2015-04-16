@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="hand.js"></script>
+    <script src="babylon.js"></script>
+</head>
+<body>
+<canvas id="frontBuffer" width="640" height="480" style="background-color:#000000;width:640px;height:480px"></canvas><br>
+Current FPS: <span id="currentFPS"></span>
+Average FPS: <span id="averageFPS"></span>
+<script>
+    window['requestAnimationFrame'] = ( function(){
+        return window['requestAnimationFrame'] ||
+               window['webkitRequestAnimationFrame'] ||
+               window['mozRequestAnimationFrame'] ||
+               function(callback){ window.setTimeout( callback, 1000 / 60 ); };
+    } )();
+</script>
+<script>
+    (function(doc){
+        'use strict';
+        var divCurrentFPS, divAverageFPS,
+            previousDate = Date.now(), lastFPSValues = new Array(60);
+
+        divCurrentFPS = doc.getElementById('currentFPS');
+        divAverageFPS = doc.getElementById('averageFPS');
+
+        if( BABYLON.Engine.isSupported() ){
+            var canvas = doc.getElementById('frontBuffer');
+            var engine = new BABYLON.Engine( canvas, true );
+
+            BABYLON.SceneLoader.Load( '', 'monkey.babylon', engine, function(newScene){
+                newScene.executeWhenReady( function(){
+                    // Scene이 로드되면 랜더 루프를 등록.
+                    engine.runRenderLoop( function(){
+                        var meshes = newScene.meshes;
+                        for( var i = 0; i < meshes.length; i++ ){
+                            meshes[i].rotation.y += 0.01;
+                        }
+                        newScene.render();
+                    } );
+                } );
+            }, function(progress){
+                // progress...
+            }, function(error){
+                console.log(error);
+            } );
+        }
+
+        requestAnimationFrame(drawingLoop);
+
+        function drawingLoop(){
+            // FPS
+            var now = Date.now(), currentFPS = 1000 / ( now - previousDate ), i;
+            previousDate = now;
+
+            divCurrentFPS.textContent = currentFPS.toFixed(2);
+
+            if( lastFPSValues.length < 60 ){
+                lastFPSValues.push(currentFPS);
+            }else{
+                lastFPSValues.shift();
+                lastFPSValues.push(currentFPS);
+                var totalValues = 0, averageFPS;
+                for( i = 0; i < lastFPSValues.length; i++ ){
+                    totalValues += lastFPSValues[i];
+                }
+                averageFPS = totalValues / lastFPSValues.length;
+                divAverageFPS.textContent = averageFPS.toFixed(2);
+            }
+
+            // rendering loop를 재호출
+            requestAnimationFrame(drawingLoop);
+        }
+    })(document);
+</script>
+</body>
+</html>
