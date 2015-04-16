@@ -7,7 +7,7 @@
     <script src="babylon.js"></script>
 </head>
 <body>
-<canvas id="frontBuffer" width="640" height="480" style="background-color:#000000;width:640px;height:480px"></canvas><br>
+<canvas id="renderCanvas" width="640" height="480" style="background-color:#000000;width:640px;height:480px"></canvas><br>
 Current FPS: <span id="currentFPS"></span>
 Average FPS: <span id="averageFPS"></span>
 <script>
@@ -28,7 +28,7 @@ Average FPS: <span id="averageFPS"></span>
         divAverageFPS = doc.getElementById('averageFPS');
 
         if( BABYLON.Engine.isSupported() ){
-            var canvas = doc.getElementById('frontBuffer');
+            var canvas = doc.getElementById('renderCanvas');
             var engine = new BABYLON.Engine( canvas, true );
 
             BABYLON.SceneLoader.Load( '', 'monkey.babylon', engine, function(newScene){
