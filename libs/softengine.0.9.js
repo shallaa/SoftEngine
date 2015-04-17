@@ -193,7 +193,7 @@ var SoftEngine;
             var y = vector1.y - vector2.y;
             var z = vector1.z - vector2.z;
             return x * x + y * y + z * z;
-        }
+        };
         return Vector3;
     })();
     SoftEngine.Vector3 = Vector3;
