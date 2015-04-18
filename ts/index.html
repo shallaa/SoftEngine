@@ -3,13 +3,18 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <style> body { background-color:#000;margin:0;padding:0;overflow:hidden; } </style>
+    <style>
+        body {background-color:#000;margin:0;padding:0;overflow:hidden}
+        .FPS {color:#FFF;left:0px;top:0px;position:absolute}
+    </style>
     <script src="libs/softengine.0.1.js"></script>
 </head>
 <body>
-<canvas id="frontBuffer" width="640" height="480" style="background-color:#000000;width:640px;height:480px"></canvas><br>
-Current FPS: <span id="currentFPS"></span>
-Average FPS: <span id="averageFPS"></span>
+<canvas id="frontBuffer" style="background-color:#000000;width:640px;height:480px"></canvas><br>
+<div class="FPS">
+    Current FPS: <span id="currentFPS"></span>
+    Average FPS: <span id="averageFPS"></span>
+</div>
 <script>
     (function(W){
         'use strict';
