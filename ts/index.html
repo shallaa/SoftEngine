@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <style> body { background-color:#000;margin:0;padding:0;overflow:hidden; } </style>
     <script src="libs/softengine.0.1.js"></script>
 </head>
 <body>
@@ -10,16 +11,20 @@
 Current FPS: <span id="currentFPS"></span>
 Average FPS: <span id="averageFPS"></span>
 <script>
-    (function(doc){
+    (function(W){
         'use strict';
-        var canvas, device, meshes = [], camera,
-                divCurrentFPS, divAverageFPS,
-                previousDate = Date.now(), lastFPSValues = new Array(60);
-
-        doc.addEventListener( 'DOMContentLoaded', init, false );
+        var doc = W['document'], canvas, device, meshes = [], camera,
+            divCurrentFPS, divAverageFPS,
+            previousDate = Date.now(), lastFPSValues = new Array(60);
 
         function init(){
+            var sw = W['innerWidth']  || docEl['clientWidth']  || docBody['clientWidth'],
+                sh = W['innerHeight'] || docEl['clientHeight'] || docBody['clientHeight'];
+
             canvas = doc.getElementById('frontBuffer');
+            canvas.width = sw, canvas.height = sh;
+            canvas.style.width = sw + 'px', canvas.style.height = sh + 'px';
+
             divCurrentFPS = doc.getElementById('currentFPS');
             divAverageFPS = doc.getElementById('averageFPS');
             device = new SoftEngine.Device(canvas);
@@ -74,7 +79,9 @@ Average FPS: <span id="averageFPS"></span>
             // rendering loop를 재호출
             requestAnimationFrame(drawingLoop);
         }
-    })(document);
+
+        init();
+    })(this);
 </script>
 </body>
 </html>
