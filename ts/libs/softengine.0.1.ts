@@ -976,7 +976,7 @@ module SoftEngine {
                 if ( uvCount > 0 ) {
                     var meshTextureID:string = jsonObject.meshes[meshIndex].materialId;
                     var meshTextureName:string = materials[meshTextureID].DiffuseTextureName;
-                    mesh.Texture = new Texture(meshTextureName, 512, 512);
+                    mesh.Texture = new Texture( '../models/' + meshTextureName, 512, 512);
                 }
 
                 mesh.computeFacesNormals();
