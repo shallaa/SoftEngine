@@ -71,8 +71,9 @@
         function addMesh(){
             var loader = new THREE.JSONLoader();
             loader.load( '../models/monkey.babylon', function(ms){
-                meshes = ms;
-                scene.add(meshes[0]);
+                while( ms.length ){
+                    scene.add( meshes[meshes.length] = ms.pop() );
+                }
             } );
         }
 
