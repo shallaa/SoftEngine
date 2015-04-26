@@ -50,12 +50,13 @@ THREE.JSONLoader.prototype = {
             var data = json.materials[i];
 
             var texture = THREE.ImageUtils.loadTexture( '../models/' + data.diffuseTexture.name );
+            texture.flipY = false;
 
-            var material = new THREE.MeshLambertMaterial({color:0xFFFFFF});
+            var material = new THREE.MeshLambertMaterial({map:texture});
             material.color.fromArray(data.diffuse);
-            //material.name = data.name;
-            //material.id = data.id;
-            //material.opacity = data.alpha;
+            material.name = data.name;
+            material.id = data.id;
+            material.opacity = data.alpha;
 
             materials[data.id] = material;
 
