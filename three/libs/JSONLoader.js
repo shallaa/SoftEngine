@@ -127,7 +127,6 @@ THREE.JSONLoader.prototype = {
 
                 var v = verticesArray[i * verticesStep + 7];
 
-                // Three 좌표로 변환 필요.
                 uvs.push( u, v );
 
             }else{
@@ -148,8 +147,6 @@ THREE.JSONLoader.prototype = {
             indices.push( a, b, c );
 
         }
-
-        var position = json.position;
 
         geometry.addAttribute( 'index', new THREE.BufferAttribute( new Uint16Array(indices), 1 ) );
 

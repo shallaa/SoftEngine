@@ -886,10 +886,10 @@ module SoftEngine {
             }
         }
 
-        public LoadJSONFileAsync( fileName:string, callback:(result: Mesh[]) => any ):void {
+        public LoadJSONFileAsync( fileName:string, callback:(result:Mesh[]) => any ):void {
             var jsonObject:any = {};
             var xmlhttp:XMLHttpRequest = new XMLHttpRequest();
-            xmlhttp.open( "GET", fileName, true );
+            xmlhttp.open( 'GET', fileName, true );
             var that:any = this;
             xmlhttp.onreadystatechange = function () {
                 if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
@@ -900,7 +900,7 @@ module SoftEngine {
             xmlhttp.send( null );
         }
 
-        private CreateMeshesFromJSON( jsonObject:any ):Mesh[] {
+        public CreateMeshesFromJSON( jsonObject:any ):Mesh[] {
             var meshes:Mesh[] = [];
             var materials:Material[] = [];
 
