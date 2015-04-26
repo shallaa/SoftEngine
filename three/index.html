@@ -50,16 +50,9 @@
         }
 
         function setupRenderer(){
-            var c = doc.createElement('canvas'), gl;
-
-            ['webgl', 'experimental-webgl', 'webkit-3d', 'moz-webgl'].some(function(k){ return gl = c.getContext(k); });
-
-            renderer = ( gl ) ? new THREE.WebGLRenderer({canvas:canvas}) : new THREE.CanvasRenderer({canvas:canvas});
-
+            renderer = new THREE.WebGLRenderer({canvas:canvas});
             renderer.setClearColor( new THREE.Color(0x000000), 1.0 );
             renderer.setSize( sw, sh );
-
-            c = undefined, gl = undefined;
         }
 
         function setupScene(){
