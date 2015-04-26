@@ -823,7 +823,7 @@ var SoftEngine;
         Device.prototype.LoadJSONFileAsync = function (fileName, callback) {
             var jsonObject = {};
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", fileName, true);
+            xmlhttp.open('GET', fileName, true);
             var that = this;
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
