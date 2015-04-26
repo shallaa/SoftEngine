@@ -69,7 +69,7 @@
 
         function addMesh(){
             var loader = new THREE.JSONLoader();
-            loader.load( '../models/monkey.json', function(ms){
+            loader.load( '../models/monkey.babylon', function(ms){
                 meshes = ms;
                 scene.add(meshes[0]);
             } );
