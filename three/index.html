@@ -42,17 +42,17 @@
             divCurrentFPS = doc.getElementById('currentFPS');
             divAverageFPS = doc.getElementById('averageFPS');
 
-            setupRenderer();
-            setupScene();
-            setupCamera();
-
-            renderScene();
-        }
-
-        function setupRenderer(){
             renderer = new THREE.WebGLRenderer({canvas:canvas});
-            renderer.setClearColor( new THREE.Color(0x000000), 1.0 );
-            renderer.setSize( sw, sh );
+
+            if( renderer.getContext() ){
+                renderer.setClearColor( new THREE.Color(0x000000), 1.0 );
+                renderer.setSize( sw, sh );
+
+                setupScene();
+                setupCamera();
+
+                renderScene();
+            }else location.href = 'http://get.webgl.org/';
         }
 
         function setupScene(){
