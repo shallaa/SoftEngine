@@ -1,0 +1,20 @@
+{
+  "name": "soft-engine",
+  "version": "1.0.0",
+  "description": "tutorial: http://ligo.kr/vwz",
+  "main": "libs/softengine.0.9.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shallaa/SoftEngine.git"
+  },
+  "keywords": ["CPU", "3D"],
+  "author": "shallaa@shallaazm.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shallaa/SoftEngine/issues"
+  },
+  "homepage": "https://github.com/shallaa/SoftEngine#readme"
+}
