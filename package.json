@@ -1,6 +1,6 @@
 {
   "name": "soft-engine",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "tutorial: http://ligo.kr/vwz",
   "main": "libs/softengine.0.9.js",
   "scripts": {
